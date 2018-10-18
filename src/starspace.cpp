@@ -332,10 +332,10 @@ Metrics StarSpace::evaluateOne(
     if (cur_score > score) {
       rank++;
     } else if (cur_score == score) {
-      float flip = (float) rand() / RAND_MAX;
-      if (flip > 0.5) {
-        rank++;
-      }
+      //      float flip = (float) rand() / RAND_MAX;
+      //      if (flip > 0.5) {
+      //        rank++;
+      //      }
     }
     heap.push({ cur_score, i + 1 });
   }

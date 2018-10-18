@@ -18,11 +18,13 @@
 namespace starspace {
 
 struct Metrics {
-  float hit1, hit10, hit20, hit50, rank;
+  float hit1, hit3, hit5, hit10, hit20, hit50, rank;
   int32_t count;
 
   void clear() {
     hit1 = 0;
+    hit3 = 0;
+    hit5 = 0; 
     hit10 = 0;
     hit20 = 0;
     hit50 = 0;
@@ -32,6 +34,8 @@ struct Metrics {
 
   void add(const Metrics& b) {
     hit1 += b.hit1;
+    hit3 += b.hit3;
+    hit5 += b.hit5; 
     hit10 += b.hit10;
     hit20 += b.hit20;
     hit50 += b.hit50;
@@ -44,6 +48,8 @@ struct Metrics {
       return ;
     }
     hit1 /= count;
+    hit3 /= count;
+    hit5 /= count; 
     hit10 /= count;
     hit20 /= count;
     hit50 /= count;
@@ -53,6 +59,8 @@ struct Metrics {
   void print() {
     std::cout << "Evaluation Metrics : \n"
          << "hit@1: " << hit1
+         << " hit@3: " << hit3
+         << " hit@5: " << hit5 
          << " hit@10: " << hit10
          << " hit@20: " << hit20
          << " hit@50: " << hit50
@@ -62,6 +70,8 @@ struct Metrics {
 
   void update(int cur_rank) {
     if (cur_rank == 1) { hit1++; }
+    if (cur_rank <= 3) { hit3++; }
+    if (cur_rank <= 5) { hit5++; } 
     if (cur_rank <= 10) { hit10++; }
     if (cur_rank <= 20) { hit20++; }
     if (cur_rank <= 50) { hit50++; }
